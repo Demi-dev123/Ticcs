@@ -1,0 +1,6 @@
+{
+  "name": "Ticss",
+  "description": "Bespoke QR pass designer and check-in verification system for events.",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

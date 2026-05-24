@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@300;400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-brand: #6C47FF;
+  --color-brand-hover: #5B39E0;
+
+  --color-dark-base: #1B1B1B;
+  --color-dark-s1: #222222;
+  --color-dark-s2: #2A2A2A;
+  --color-dark-s3: #313131;
+  --color-dark-border: #333333;
+  --color-dark-border-soft: #2A2A2A;
+  --color-dark-ink: #F2F2F2;
+  --color-dark-ink-muted: #888888;
+  --color-dark-ink-subtle: #555555;
+
+  --color-light-base: #FFFFFE;
+  --color-light-s1: #F7F7F7;
+  --color-light-s2: #F0F0F0;
+  --color-light-s3: #E8E8E8;
+  --color-light-border: #E2E2E2;
+  --color-light-border-soft: #EBEBEB;
+  --color-light-ink: #111111;
+  --color-light-ink-muted: #777777;
+  --color-light-ink-subtle: #AAAAAA;
+
+  --color-success: #16A34A;
+  --color-warning: #D97706;
+  --color-error: #DC2626;
+
+  --font-sans: "Geist", system-ui, sans-serif;
+  --font-display: "Geist", sans-serif;
+  --font-mono: "Geist Mono", monospace;
+
+  --shadow-card-dark: 0 1px 4px rgba(0, 0, 0, 0.4);
+  --shadow-card-light: 0 1px 4px rgba(0, 0, 0, 0.06);
+  --shadow-pass-dark: 0 4px 20px rgba(0, 0, 0, 0.6);
+  --shadow-pass-light: 0 4px 20px rgba(0, 0, 0, 0.10);
+  --shadow-modal-dark: 0 8px 32px rgba(0, 0, 0, 0.7);
+  --shadow-modal-light: 0 8px 32px rgba(0, 0, 0, 0.12);
+  --shadow-focus: 0 0 0 3px rgba(108, 71, 255, 0.15);
+}
+
+:root {
+  /* Light mode defaults as instructed */
+  --base: #FFFFFE;
+  --surface-current: #FFFFFE;
+  --surface-1: #F7F7F7;
+  --surface-2: #F0F0F0;
+  --surface-3: #E8E8E8;
+  --border: #E2E2E2;
+  --border-soft: #EBEBEB;
+  --ink: #111111;
+  --ink-muted: #777777;
+  --ink-subtle: #AAAAAA;
+  --shadow-card: 0 1px 4px rgba(0, 0, 0, 0.06);
+  --shadow-pass: 0 4px 20px rgba(0, 0, 0, 0.10);
+  --shadow-modal: 0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+.dark {
+  /* Dark mode mappings */
+  --base: #1B1B1B;
+  --surface-current: #1B1B1B;
+  --surface-1: #222222;
+  --surface-2: #2A2A2A;
+  --surface-3: #313131;
+  --border: #333333;
+  --border-soft: #2A2A2A;
+  --ink: #F2F2F2;
+  --ink-muted: #888888;
+  --ink-subtle: #555555;
+  --shadow-card: 0 1px 4px rgba(0, 0, 0, 0.4);
+  --shadow-pass: 0 4px 20px rgba(0, 0, 0, 0.6);
+  --shadow-modal: 0 8px 32px rgba(0, 0, 0, 0.7);
+}
+
+body {
+  background-color: var(--base);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  transition: background-color 150ms ease, color 150ms ease;
+  overflow-x: hidden;
+}
+
+/* Base interactive button support */
+button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: none;
+  border-color: #6C47FF !important;
+  box-shadow: 0 0 0 3px rgba(108, 71, 255, 0.15);
+}
