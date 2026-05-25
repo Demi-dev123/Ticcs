@@ -115,9 +115,9 @@ function DashboardShell() {
           >
             Ticss
           </span>
-          <span className="text-[10px] font-mono tracking-wider font-semibold opacity-40 bg-neutral-100 dark:bg-neutral-800 px-1.5 py-0.5 rounded ml-2 text-neutral-600 dark:text-neutral-400">
-            MVP V1.0
-          </span>
+         <span className="text-[10px] font-mono tracking-wider font-semibold bg-neutral-200 dark:bg-neutral-700 px-1.5 py-0.5 rounded ml-2 text-neutral-700 dark:text-neutral-200 border border-neutral-300/40 dark:border-neutral-600/40">
+  MVP V1.0
+</span>
         </div>
 
         {/* Navigation Action Buttons / Links */}
@@ -297,7 +297,7 @@ function DashboardShell() {
 
       {/* Simple structured Footer */}
       <footer className="py-6 px-4 md:px-8 bg-white dark:bg-[#1B1B1B] border-t border-light-border-soft dark:border-[#2A2A2A] text-center text-[10px] text-neutral-400 font-mono tracking-widest uppercase">
-        <span>{isRealSupabase ? 'Supabase Secure Connect' : 'Local Sandbox Auth'} · Built by Demi for Ticss · Slate Aesthetic · Actions in PURPLE only</span>
+        <span> · Built by Demi for Ticss ·</span>
       </footer>
 
     </div>
