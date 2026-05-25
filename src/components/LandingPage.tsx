@@ -16,18 +16,11 @@ export default function LandingPage({ onGetStarted, onLoginClick }: LandingPageP
         {/* 1. Hero Section */}
         <div className="text-center space-y-6 max-w-2xl mx-auto">
           {/* Eyebrow badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-wide bg-neutral-100 dark:bg-neutral-850 text-neutral-500 dark:text-neutral-400 border border-neutral-205 dark:border-neutral-800/30">
-            <Sparkles className="w-3.5 h-3.5 text-[#6C47FF]" />
-            <span className="font-mono uppercase tracking-wider text-[10px]">MINIMALIST GATEWAY</span>
-          </div>
 
           <div className="space-y-4">
             <h1 className="text-5xl md:text-6xl font-sans font-bold tracking-tight text-neutral-900 dark:text-white leading-[1.05]">
-              Ticss
-            </h1>
-            <h2 className="text-2xl md:text-3xl font-sans font-semibold tracking-tight text-neutral-850 dark:text-neutral-200">
               Create and manage event QR passes instantly
-            </h2>
+            </h1>
             <p className="text-base md:text-lg text-neutral-500 dark:text-neutral-400 font-normal leading-relaxed max-w-xl mx-auto font-sans">
               Generate attendee QR codes, track check-ins, and manage events in seconds.
             </p>
@@ -46,7 +39,7 @@ export default function LandingPage({ onGetStarted, onLoginClick }: LandingPageP
             <button
               onClick={onLoginClick}
               type="button"
-              className="w-full sm:w-auto px-8 py-3.5 rounded-full text-sm font-semibold tracking-wide border border-neutral-250 dark:border-neutral-800/30 text-neutral-600 dark:text-neutral-350 bg-neutral-50 dark:bg-neutral-900/40 hover:bg-neutral-100 dark:hover:bg-neutral-850 active:scale-[0.98] transition-all cursor-pointer"
+              className="w-full sm:w-auto px-8 py-3.5 rounded-full text-sm font-semibold tracking-wide border border-neutral-200 dark:border-neutral-700 text-neutral-700 dark:text-neutral-300 bg-neutral-50 dark:bg-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-700 active:scale-[0.98] transition-all cursor-pointer"
             >
               Sign In to Account
             </button>

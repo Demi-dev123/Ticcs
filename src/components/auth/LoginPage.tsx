@@ -99,7 +99,7 @@ export default function LoginPage({ onNavigateToSignup, onSuccess }: LoginPagePr
             disabled={isLoading}
             className="w-full py-3 px-4 rounded-xl text-sm font-semibold tracking-wide bg-[#6C47FF] hover:bg-[#5B39E0] text-white flex items-center justify-center gap-2 shadow-focus active:scale-[0.98] transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            <span>{isLoading ? 'Signing In...' : 'Get Started'}</span>
+            <span>{isLoading ? 'Signing In...' : 'Sign In'}</span>
             {!isLoading && <ArrowRight className="w-4 h-4" />}
           </button>
         </form>

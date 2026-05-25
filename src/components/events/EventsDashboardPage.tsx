@@ -356,12 +356,12 @@ export default function EventsDashboardPage({ onCreateEventClick, onEventClick }
 
                         {/* Bottom strip */}
                         <div className="pt-4 border-t border-neutral-100 dark:border-neutral-850 flex items-center justify-between">
-                          <div className="flex items-center gap-1 bg-neutral-100 dark:bg-neutral-850 px-2 py-1 rounded-lg">
-                            <Users className="w-3.5 h-3.5 text-[#6C47FF]" />
-                            <span className="text-xs font-bold font-mono text-neutral-800 dark:text-neutral-300">
-                              {attendeesCount} passes
-                            </span>
-                          </div>
+                          <div className="flex items-center gap-1 bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded-lg">
+  <Users className="w-3.5 h-3.5 text-[#6C47FF]" />
+  <span className="text-xs font-bold font-mono text-neutral-800 dark:text-neutral-300">
+    {attendeesCount} passes
+  </span>
+</div>
                           
                           <div className="text-neutral-400 group-hover:text-[#6C47FF] transition-colors flex items-center gap-1 text-[10px] font-bold tracking-wider font-mono">
                             <span>OPEN</span>
