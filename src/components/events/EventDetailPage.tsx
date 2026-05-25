@@ -31,6 +31,7 @@ import {
   Trash2,
   Link,
   FileText,
+  ScanLine,
   Image as ImageIcon
 } from 'lucide-react';
 import PassPreview from '../designer/PassPreview';
@@ -53,9 +54,11 @@ const generateUUID = () => {
 interface EventDetailPageProps {
   eventId: string;
   onBack: () => void;
+  onScanClick: () => void; // ← add this
+
 }
  
-export default function EventDetailPage({ eventId, onBack }: EventDetailPageProps) {
+export default function EventDetailPage({ eventId, onBack, onScanClick }: EventDetailPageProps) {
   const { user } = useAuth();
   const [event, setEvent] = useState<Event | null>(null);
   const [attendees, setAttendees] = useState<Attendee[]>([]);
@@ -527,13 +530,12 @@ export default function EventDetailPage({ eventId, onBack }: EventDetailPageProp
             </div>
  
             {/* ── Roster Table Card ── */}
-            <div className="bg-white dark:bg-[#222222] border border-neutral-200/40 dark:border-neutral-800/40 rounded-2xl shadow-sm overflow-hidden text-left">
+            <div className="bg-white dark:bg-[#222222] border border-neutral-200/40 dark:border-neutral-800/40 rounded-2xl shadow-sm overflow-visible text-left">
  
               {/* Roster Header */}
               <div className="p-5 border-b border-neutral-100 dark:border-neutral-800/50 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
                 <div>
                   <h3 className="text-base font-bold text-neutral-900 dark:text-white">Attendee Roster</h3>
-                  <p className="text-xs text-neutral-400 leading-none mt-1">Simulate pass verification & check-ins below</p>
                 </div>
                 <div className="flex gap-2 w-full sm:w-auto">
                   <button
@@ -550,6 +552,15 @@ export default function EventDetailPage({ eventId, onBack }: EventDetailPageProp
                     <Plus className="w-3.5 h-3.5" />
                     <span>Add Attendee</span>
                   </button>
+
+
+<button
+  onClick={onScanClick}
+  className="flex-1 px-3.5 py-1.5 rounded-lg text-xs font-semibold tracking-wide bg-[#6C47FF] hover:bg-[#5B39E0] text-white transition-all flex items-center justify-center gap-1.5 cursor-pointer active:scale-95"
+>
+  <ScanLine className="w-3.5 h-3.5" />
+  <span>Scan Passes</span>
+</button>
                 </div>
               </div>
  
@@ -767,15 +778,12 @@ export default function EventDetailPage({ eventId, onBack }: EventDetailPageProp
                     {/* Pass render target — ID used by PNG/PDF export */}
                     <div id={`pass-render-${activeAtt.id}`}>
                       <PassPreview
-                        event={{
-                          ...event,
-                          name: event.name,
-                          organizer_name: `Attendee: ${activeAtt.name}`,
-                          venue: `Ticket Type: ${activeAtt.ticket_type}`,
-                          time: `Code: ${activePass.pass_id}`,
-                          brand_color: event.brand_color || '#6C47FF',
-                        }}
-                      />
+  event={event}
+  attendeeName={activeAtt.name}
+  ticketType={activeAtt.ticket_type}
+  passId={activePass.pass_id}
+  qrToken={activePass.qr_token}
+/>
                     </div>
  
                     {/* Check-in controls */}
@@ -785,16 +793,6 @@ export default function EventDetailPage({ eventId, onBack }: EventDetailPageProp
                         <p className="text-xs font-bold text-neutral-800 dark:text-neutral-200 mt-0.5">{activeAtt.name}</p>
                         <p className="text-[10px] text-neutral-400 font-mono mt-0.5 break-all">{activePass.qr_token}</p>
                       </div>
-                      <button
-                        onClick={() => togglePassStatus(activeAtt.id)}
-                        className={`w-full py-2.5 rounded-xl font-mono text-xs font-bold transition-all text-center flex items-center justify-center gap-1.5 ${
-                          activePass.status === 'used'
-                            ? 'bg-rose-500/10 text-rose-500 border border-rose-500/20 hover:bg-rose-500/15'
-                            : 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 hover:bg-emerald-500/15'
-                        }`}
-                      >
-                        {activePass.status === 'used' ? 'Reset to Not Checked' : 'Simulate QR Check-In'}
-                      </button>
                     </div>
                   </div>
                 </div>

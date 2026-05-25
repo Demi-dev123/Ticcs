@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ThemeProvider, useTheme } from './components/ThemeContext';
 import { AuthProvider, useAuth } from './components/AuthContext';
 import LandingPage from './components/LandingPage';
@@ -7,6 +7,7 @@ import SignupPage from './components/auth/SignupPage';
 import NewEventPage from './components/events/NewEventPage';
 import EventsDashboardPage from './components/events/EventsDashboardPage';
 import EventDetailPage from './components/events/EventDetailPage';
+import ScanPassesPage from './components/events/ScanPassesPage';
 import { Event } from './types';
 import { Sparkles, Sun, Moon, CheckCircle2, RotateCcw, ArrowRight, LogOut, User } from 'lucide-react';
 
@@ -15,7 +16,7 @@ function DashboardShell() {
   const { user, loading, signOut, isRealSupabase } = useAuth();
   const [createdEvent, setCreatedEvent] = useState<Event | null>(null);
   const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
-  const [currentView, setCurrentView] = useState<'landing' | 'login' | 'signup' | 'create' | 'success' | 'dashboard' | 'event-details'>('landing');
+  const [currentView, setCurrentView] = useState<'landing' | 'login' | 'signup' | 'create' | 'success' | 'dashboard' | 'event-details' | 'scan'>('landing');
 
   // URL routing synchronization (history state sync)
   React.useEffect(() => {
@@ -75,6 +76,18 @@ function DashboardShell() {
   };
 
   // Guard routing on unauthorized state updates
+  
+useEffect(() => {
+  if (currentView === 'scan' && selectedEventId) {
+    window.history.pushState(
+      {},
+      '',
+      `/events/${selectedEventId}/scan`
+    );
+  }
+}, [currentView, selectedEventId]);
+
+
   React.useEffect(() => {
     if (!loading && !user && (currentView === 'create' || currentView === 'success' || currentView === 'dashboard' || currentView === 'event-details')) {
       setCurrentView('login');
@@ -104,10 +117,8 @@ function DashboardShell() {
           {/* Logo Icon */}
           <button 
             type="button"
-            onClick={() => setCurrentView(user ? 'dashboard' : 'landing')}
-            className="w-8 h-8 rounded-full bg-[#6C47FF] flex items-center justify-center shadow-focus cursor-pointer"
-          >
-            <span className="text-white font-mono text-xs font-extrabold tracking-tight">TS</span>
+            onClick={() => setCurrentView(user ? 'dashboard' : 'landing')}> 
+            <img src="/header.svg" alt="Logo" className="w-8 h-8" />
           </button>
           <span 
             onClick={() => setCurrentView(user ? 'dashboard' : 'landing')}
@@ -124,14 +135,14 @@ function DashboardShell() {
         <div className="flex items-center gap-4">
           
           {/* Theme Selector */}
-          <button
+          {/* <button
             onClick={toggleTheme}
             type="button"
             className="w-10 h-10 rounded-full border border-neutral-200 dark:border-[#333333] flex items-center justify-center text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-[#2A2A2A] cursor-pointer"
             aria-label="Toggle visual theme"
           >
             {theme === 'dark' ? <Sun className="w-4 h-4 text-[#D97706]" /> : <Moon className="w-4 h-4 text-[#6C47FF]" />}
-          </button>
+          </button> */}
 
           {/* Profile placeholder info / Sign out actions */}
           <div className="flex items-center gap-2 border-l border-neutral-200 dark:border-neutral-800 pl-4">
@@ -175,7 +186,7 @@ function DashboardShell() {
       <main className="flex-1 flex flex-col justify-between">
         {currentView === 'landing' && (
           <LandingPage 
-            onGetStarted={navigateToCreate}
+            onGetStarted={() => setCurrentView('signup')}
             onLoginClick={() => setCurrentView('login')}
           />
         )}
@@ -204,16 +215,21 @@ function DashboardShell() {
           />
         )}
 
-        {currentView === 'event-details' && selectedEventId && (
-          <EventDetailPage 
-            eventId={selectedEventId}
-            onBack={() => {
-              setSelectedEventId(null);
-              setCurrentView('dashboard');
-            }}
-          />
-        )}
+  {currentView === 'event-details' && selectedEventId && (
+  <EventDetailPage
+    eventId={selectedEventId}
+    onBack={() => { setSelectedEventId(null); setCurrentView('dashboard'); }}
+    onScanClick={() => setCurrentView('scan')}
+  />
+)}
 
+{currentView === 'scan' && selectedEventId && (
+  <ScanPassesPage
+    eventId={selectedEventId}
+    onBack={() => setCurrentView('event-details')}
+  />
+)}
+ 
         {currentView === 'create' && (
           <NewEventPage 
             onEventCreated={handleEventCreated}
